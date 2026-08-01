@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#E9ECE6" />
+  <title>Logbook</title>
+  <link rel="icon" href="/static/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css?v=13" />
+</head>
+<body>
+  <!-- Login -->
+  <div id="login-view" class="login-wrap hidden">
+    <form id="login-form" class="login-card">
+      <h1 class="login-mark">Logbook</h1>
+      <p class="login-sub">A record of process, not profit.</p>
+      <label>Username<input id="login-username" autocomplete="username" required /></label>
+      <label>Password<input id="login-password" type="password" autocomplete="current-password" required /></label>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+      <p id="login-error" class="login-error"></p>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div id="app-view" class="hidden">
+    <header class="topbar">
+      <div class="brand">Logbook</div>
+      <nav class="nav" id="nav"></nav>
+      <select id="account-switcher" class="acct-switcher" title="Active account"></select>
+      <button id="logout-btn" class="btn btn-ghost btn-sm">Sign out</button>
+    </header>
+    <main id="main" class="main"></main>
+  </div>
+
+  <div id="modal-root"></div>
+
+  <script src="/static/js/app.js?v=20"></script>
+</body>
+</html>

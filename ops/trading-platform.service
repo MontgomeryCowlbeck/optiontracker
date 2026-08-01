@@ -1,0 +1,16 @@
+[Unit]
+Description=Personal trading platform (port_tracker)
+After=network-online.target
+
+[Service]
+WorkingDirectory=/projects/quant/port_tracker
+# Single process on purpose: the in-app scheduler (fills sync, greek poll,
+# equity snapshot) must not run in duplicate workers.
+ExecStart=/projects/quant/venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8600
+Environment=DATABASE_PATH=/data/structured/tracker/options.db
+Environment=PATH=/home/monty/.local/bin:/usr/local/bin:/usr/bin:/bin
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

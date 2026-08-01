@@ -1,0 +1,24 @@
+services:
+  options-tracker:
+    build: .
+    ports:
+      - "8082:8000"
+    volumes:
+      - ./data:/app/data
+      # config.py falls back to these files when the env vars below are unset,
+      # so creds never need duplicating into an .env.
+      - /projects/quant/.secrets:/projects/quant/.secrets:ro
+    environment:
+      - TASTYTRADE_CLIENT_ID=${TASTYTRADE_CLIENT_ID:-}
+      - TASTYTRADE_CLIENT_SECRET=${TASTYTRADE_CLIENT_SECRET:-}
+      - TASTYTRADE_REFRESH_TOKEN=${TASTYTRADE_REFRESH_TOKEN:-}
+      - TASTYTRADE_SANDBOX=${TASTYTRADE_SANDBOX:-false}
+      - DATABASE_PATH=/app/data/options.db
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-}
+      - JWT_EXPIRE_DAYS=${JWT_EXPIRE_DAYS:-30}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
